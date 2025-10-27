@@ -1,0 +1,142 @@
+:root{
+  --background: rgb(184, 147, 206);
+  --accent: rgb(78, 115, 255);
+  --accent-2: rgb(255, 118, 117);
+  --soft: rgb(240, 240, 245);
+  --pin-size: 72px;
+  --pin-gap: 24px;
+}
+
+/* Reset y base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, var(--background) 0%, #091226 100%);
+  color: var(--soft);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+}
+
+/* Contenedor principal */
+.scene{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Título */
+.title{
+  position:relative;
+  z-index:20;
+  text-align:left;
+  margin-bottom:28px;
+}
+.title h1{
+  font-size:32px;
+  letter-spacing:0.4px;
+  margin-bottom:6px;
+}
+.title p{
+  color:rgba(255, 96, 242, 0.65);
+  font-size:14px;
+}
+
+/* Área donde "flotan" elementos */
+.stage{
+  position:relative;
+  width:100%;
+  height:420px;
+  background: linear-gradient(180deg, rgba(154, 205, 253, 0.5), rgba(237, 166, 247, 0.445));
+  border-radius:18px;
+  padding:28px;
+  box-shadow: 0 10px 30px rgba(245, 237, 122, 0.555), inset 0 1px 0 rgba(85, 88, 245, 0.363);
+  overflow:hidden;
+}
+
+/* Estilos comunes para los "pins" (elementos animados) */
+.pin{
+  position:absolute;
+  width:var(--pin-size);
+  height:var(--pin-size);
+  border-radius:14px;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 20px rgba(21, 2, 23, 0.5), 0 2px 6px rgba(0,0,0,0.25);
+  transform-origin:center;
+  opacity:0.95;
+  mix-blend-mode:screen;
+}
+
+/* Ubicaciones iniciales aproximadas (reconstruidas) */
+.pin-1{ left:6%;  top:18%;  width:84px; height:84px; border-radius:16px; animation:float-1 18s infinite linear; }
+.pin-2{ left:28%; top:40%;  width:64px; height:64px; border-radius:12px; animation:float-2 16s infinite linear; }
+.pin-3{ left:52%; top:12%;  width:72px; height:72px; border-radius:18px; animation:float-3 20s infinite linear; }
+.pin-4{ left:74%; top:36%;  width:56px; height:56px; border-radius:12px; animation:float-4 14s infinite linear; }
+.pin-5{ left:38%; top:68%;  width:96px; height:96px; border-radius:22px; animation:float-5 22s infinite linear; }
+
+/* Pequeñas variaciones visuales */
+.pin-1::after,
+.pin-2::after,
+.pin-3::after,
+.pin-4::after,
+.pin-5::after{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:inherit;
+  background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+
+/* Animaciones (reconstruidas para efecto flotante + rotación) */
+@keyframes float-1{
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-18px) rotate(8deg) scale(1.02); }
+  50%  { transform: translateY(0) rotate(16deg) scale(1); }
+  75%  { transform: translateY(12px) rotate(-6deg) scale(0.98); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes float-2{
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-12px) rotate(-10deg) scale(0.98); }
+  50%  { transform: translateY(0) rotate(-8deg) scale(1); }
+  75%  { transform: translateY(10px) rotate(6deg) scale(1.01); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes float-3{
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-24px) rotate(12deg) scale(1.03); }
+  50%  { transform: translateY(0) rotate(24deg) scale(1); }
+  75%  { transform: translateY(18px) rotate(-10deg) scale(0.97); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes float-4{
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-10px) rotate(4deg) scale(1.01); }
+  50%  { transform: translateY(0) rotate(8deg) scale(1); }
+  75%  { transform: translateY(8px) rotate(-4deg) scale(.99); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes float-5{
+  0%   { transform: translateY(0) rotate(0deg) scale(1); }
+  25%  { transform: translateY(-30px) rotate(-18deg) scale(1.04); }
+  50%  { transform: translateY(0) rotate(-36deg) scale(1); }
+  75%  { transform: translateY(24px) rotate(14deg) scale(0.96); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Responsividad básica */
+@media (max-width:720px){
+  :root{ --pin-size:64px }
+  .stage{ height:320px; padding:20px }
+  .title h1{ font-size:22px }
+  .pin{ opacity:0.95 }
+}
